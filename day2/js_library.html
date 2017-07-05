@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Js Library</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+    var _ = {
+       map: function(arr,callback) {
+         var result=[]
+         for(let i=0; i<arr.length; i++){
+           result.push(callback(arr[i]))
+         }
+         return result
+       },
+       reduce: function(arr,callback,memo) {
+         for(let i=0; i<arr.length; i++){
+           memo=callback(memo,arr[i])
+         }
+         return memo
+       },
+       find: function(arr,callback){
+         for(let i=0; i<arr.length; i++){
+           if (callback(arr[i])){
+             return arr[i];
+           }
+         }
+       },
+       filter: function(arr,callback) {
+         var result=[]
+         for(let i=0; i<arr.length; i++){
+           if (callback(arr[i])){
+             result.push(arr[i]);
+           }
+         }
+         return result;
+       },
+       reject: function(arr,callback) {
+         var result=[]
+         for(let i=0; i<arr.length; i++){
+           if (!callback(arr[i])){
+             result.push(arr[i]);
+           }
+       }
+        return result;
+     }
+   }
+   document.write(_.map([1,2,3,4,5],function(num){return num*100})+'<br>')
+   document.write(_.reduce([1,2,3,4,5],function(memo,num){return memo*num},1)+'<br>')
+   document.write(_.find([1,2,3,4,5],function(num){return num%2==0})+'<br>')
+   document.write(_.filter([1,2,3,4,5],function(num){return num%2==0})+'<br>')
+   document.write(_.reject([1,2,3,4,5],function(num){return num%2==0})+'<br>')
+    </script>
+  </body>
+</html>

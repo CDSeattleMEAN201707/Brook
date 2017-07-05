@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Deck of cards</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      class Decks {
+        constructor(){
+          this.cards=[]
+          this.fill_cards();
+        }
+        fill_cards(){
+            var suits=['clubs','hearts','diamonds','spades']
+            for (let j=0;j<suits.length;j++){
+              for (let i=1;i<14;i++){
+                if (i==1){
+                  this.cards.push(`A of ${suits[j]}`)
+                }
+                else if(i<11){
+                  this.cards.push(`${i} of ${suits[j]}`)
+                }
+                else if(i==11){
+                  this.cards.push(`Jack of ${suits[j]}`)
+                }
+                else if(i==12){
+                  this.cards.push(`Queen of ${suits[j]}`)
+                }
+                else{
+                  this.cards.push(`King of ${suits[j]}`)
+                }
+              }
+
+            }
+            return this
+          };
+
+
+
+        get display(){
+          return this.cards
+        }
+
+        reset(){
+          this.cards=[]
+          this.fill_cards()
+          return this
+        }
+
+
+        shuffle(){
+          var current_index=this.cards.length,temp,random_index;
+          while(current_index!=0){
+            current_index-=1
+            temp=this.cards[current_index]
+            random_index=Math.floor(Math.random()*this.cards.length)
+            this.cards[current_index]=this.cards[random_index]
+            this.cards[random_index]=temp
+          }
+          return this
+        }
+
+        deal(){
+          var idx=Math.floor(Math.random()*this.cards.length)
+          return this.cards.splice(idx,1)[0]
+        }
+
+
+      }
+      // let new_cards= new Decks()
+      // console.log(new_cards.deal())
+      // console.log(new_cards.shuffle().display)
+      // console.log(new_cards.reset().display)
+
+      class Player{
+        constructor(name,hand=[]){
+          this.name=name;
+          this.hand=hand;
+        }
+
+
+        take_card(deal){
+          console.log(`deal brook  ${deal}`)
+          this.hand.push(deal)
+          return this
+        }
+
+        discard(card){
+          var idx=this.hand.indexOf(card)
+          if (idx>=0){
+            this.hand.splice(idx,1);
+          }
+          else{
+            console.log("You can't drop card you don't have")
+          }
+          return this
+        }
+        say_name(){
+          console.log(this.name);
+          return this;
+        }
+        display_hand(){
+          return this.hand
+        }
+
+      }
+
+      // let new_cards=new Decks()
+      // console.log(new_cards.display)
+      // console.log(new_cards.shuffle())
+      // console.log(new_cards.reset())
+      // console.log(new_cards.deal())
+      // console.log(new_cards.deal())
+      // let brook= new Player("Brook")
+      // console.log(brook.say_name())
+      // console.log(brook.display_hand())
+      // brook.take_card(new_cards.deal())
+      // console.log(brook.display_hand())
+    </script>
+  </body>
+</html>
